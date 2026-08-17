@@ -272,14 +272,32 @@ body {
 }
 
 .layout-duas-colunas {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .layout-duas-colunas.reverso .conteudo-texto {
     order: 2;
+}
+.layout-duas-colunas .imagem-destaque,
+.layout-duas-colunas.reverso .imagem-destaque {
+    width: 100%;
+    min-width: 0;
+    align-self: stretch;
+}
+
+.imagem-unica-organica {
+    width: 100%;
+    max-width: 520px;
+    height: 300px;
+    margin: 0 auto;
+}
+
+.imagem-unica-organica img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 .layout-duas-colunas.reverso .imagem-destaque {
     order: 1;
@@ -623,11 +641,15 @@ body {
 }
 
 .carrossel-track {
+    --gap-carrossel: 40px;
+    --metade-gap: 20px;
+
     display: flex;
     align-items: center;
-    gap: 60px;
+    gap: var(--gap-carrossel);
     width: max-content;
-    animation: rolarDireita 30s linear infinite;
+    animation: rolarDireita 35s linear infinite;
+    will-change: transform;
 }
 
 .carrossel-track:hover {
@@ -635,26 +657,22 @@ body {
 }
 
 .logo-cliente {
-    height: 120px;
-    width: auto;
+    width: 180px;
+    height: 100px;
+    flex: 0 0 180px;
     object-fit: contain;
     filter: grayscale(100%);
     opacity: 0.7;
     transition: var(--transicao);
 }
 
-.logo-cliente:hover {
-    filter: grayscale(0%);
-    opacity: 1;
-    transform: scale(1.08);
-}
-
 @keyframes rolarDireita {
-    0% {
-        transform: translateX(-50%);
+    from {
+        transform: translateX(calc(-50% - var(--metade-gap)));
     }
-    100% {
-        transform: translateX(0%);
+
+    to {
+        transform: translateX(0);
     }
 }
 
@@ -781,6 +799,22 @@ body {
     font-size: 1rem;
     letter-spacing: 1px;
     margin-bottom: 20px;
+}
+
+.footer-telefone {
+    color: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    -webkit-text-fill-color: currentColor;
+}
+
+.footer-telefone:visited {
+    color: inherit;
+}
+
+.footer-telefone:hover {
+    color: var(--cor-secundaria);
+    text-decoration: underline;
 }
 
 .footer-links-contato {
@@ -1236,6 +1270,40 @@ body {
 }
 
 @media (max-width: 480px) {
+    .carrossel-wrapper {
+    padding: 10px 0;
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 5%,
+        black 95%,
+        transparent
+    );
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 5%,
+        black 95%,
+        transparent
+    );
+}
+
+    .carrossel-track {
+        --gap-carrossel: 24px;
+        --metade-gap: 12px;
+        animation-duration: 30s;
+    }
+
+    .logo-cliente {
+        width: 140px;
+        height: 80px;
+        flex-basis: 140px;
+    }
+    .imagem-unica-organica {
+        height: 260px;
+        border-radius: 24px;
+    }
+  
     .headline {
         font-size: 1.5rem;
     }
@@ -1293,19 +1361,20 @@ body {
 
 .cookie-banner {
     position: fixed;
-    bottom: -150px;
+    bottom: 0;
     left: 0;
     width: 100%;
     background-color: rgba(5, 11, 9, 0.95);
     backdrop-filter: blur(10px);
     z-index: 10000;
     padding: 20px 0;
-    box-shadow: 0 -10px 30px rgba(0,0,0,0.15);
-    transition: bottom 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15);
+    transform: translateY(100%);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cookie-banner.mostrar {
-    bottom: 0;
+    transform: translateY(0);
 }
 
 .cookie-content {
@@ -1339,12 +1408,30 @@ body {
 }
 
 @media (max-width: 768px) {
+    .cookie-banner {
+        max-height: 60dvh;
+        overflow-y: auto;
+        padding: 14px 0 calc(14px + env(safe-area-inset-bottom));
+    }
+
     .cookie-content {
         flex-direction: column;
         text-align: center;
-        gap: 15px;
+        gap: 12px;
+        padding: 0 16px;
     }
-    
+
+    .cookie-content p {
+        font-size: 0.8rem;
+        line-height: 1.4;
+    }
+
+    .btn-cookie {
+        width: 100%;
+        white-space: normal;
+        padding: 11px 16px !important;
+    }
+
     .footer-redes-wrapper {
         flex-direction: column;
         gap: 15px;
