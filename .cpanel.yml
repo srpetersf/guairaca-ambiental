@@ -3,3 +3,5 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home1/guairacambiental/public_html/
     - /usr/bin/rsync -a --exclude='.git/' --exclude='.cpanel.yml' ./ $DEPLOYPATH
+    - /bin/chmod 755 $DEPLOYPATH
+    - /bin/chmod 644 $DEPLOYPATH/.htaccess
