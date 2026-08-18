@@ -1,6 +1,39 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <!-- Google Consent Mode: deve vir antes do Google Tag Manager -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+
+        var consentimentoGoogle = 'denied';
+
+        try {
+            var escolhaCookies = localStorage.getItem('cookiesGuairaca');
+
+            if (escolhaCookies === 'granted' || escolhaCookies === 'true') {
+                consentimentoGoogle = 'granted';
+            }
+        } catch (erro) {
+            consentimentoGoogle = 'denied';
+        }
+
+        gtag('consent', 'default', {
+            ad_storage: consentimentoGoogle,
+            analytics_storage: consentimentoGoogle,
+            ad_user_data: consentimentoGoogle,
+            ad_personalization: consentimentoGoogle
+        });
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MQ4B3G3R');</script>
+    <!-- End Google Tag Manager -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -261,6 +294,11 @@
 </head>
 <body>
 
+        <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQ4B3G3R"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+     
     <header id="header" class="header-fixo">
         <div class="container menu-container">
             <div class="logo">
@@ -316,23 +354,23 @@
             <div class="container grid-numeros">
 
                 <div class="numero-item">
-                    <div class="contador" data-target="50">+ de 0</div>
+                    <div class="contador" data-target="100">+ de 0</div>
                     <p>Projetos Ambientais Aprovados</p>
                 </div>
 
                 <div class="numero-item">
-                    <div class="contador" data-target="1500">+ de 0</div>
+                    <div class="contador" data-target="1200">+ de 0</div>
                     <p>Hectares Recuperados</p>
                 </div>
 
                 <div class="numero-item">
-                    <div class="contador" data-target="120">+ de 0</div>
+                    <div class="contador" data-target="100">+ de 0</div>
                     <p>Clientes Corporativos Atendidos</p>
                 </div>
 
                 <div class="numero-item">
-                    <div class="contador">100%</div>
-                    <p>de Conformidade com Órgãos Fiscalizadores</p>
+                    <div class="contador" data-target="50">+ de 0</div>
+                    <p>Órgãos Fiscalizadores</p>
                 </div>
 
             </div>
@@ -645,7 +683,10 @@
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3.8l.2-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
                             </a>
                         </div>
-                        <a href="politica-de-privacidade.html" class="link-privacidade">Política de Privacidade</a>
+                        <div class="footer-politicas">
+                            <a href="politica-de-privacidade.html" class="link-privacidade">Política de Privacidade</a>
+                            <button id="preferencias-cookies" class="botao-preferencias-cookies" type="button">Preferências de cookies</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -659,10 +700,13 @@
             
         </div>
   
-        <div id="cookie-banner" class="cookie-banner">
+        <div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Preferências de cookies" aria-live="polite">
             <div class="cookie-content">
-                <p>Nós utilizamos cookies e tecnologias semelhantes para melhorar a sua experiência em nosso site. Ao continuar navegando, você concorda com a nossa <a href="politica-de-privacidade.html">Política de Privacidade</a>.</p>
-                <button id="aceitar-cookies" class="btn btn-principal btn-cookie">Entendi e Aceito</button>
+                <p>Utilizamos cookies opcionais para medir o uso do site e melhorar nossos serviços. Você pode aceitar ou recusar. Saiba mais na nossa <a href="politica-de-privacidade.html">Política de Privacidade</a>.</p>
+                <div class="cookie-acoes">
+                    <button id="recusar-cookies" class="btn btn-cookie btn-cookie-recusar" type="button">Recusar</button>
+                    <button id="aceitar-cookies" class="btn btn-principal btn-cookie" type="button">Aceitar</button>
+                </div>
             </div>
         </div>       
 

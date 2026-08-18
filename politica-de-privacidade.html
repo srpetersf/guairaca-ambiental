@@ -1,6 +1,39 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <!-- Google Consent Mode: deve vir antes do Google Tag Manager -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+
+        var consentimentoGoogle = 'denied';
+
+        try {
+            var escolhaCookies = localStorage.getItem('cookiesGuairaca');
+
+            if (escolhaCookies === 'granted' || escolhaCookies === 'true') {
+                consentimentoGoogle = 'granted';
+            }
+        } catch (erro) {
+            consentimentoGoogle = 'denied';
+        }
+
+        gtag('consent', 'default', {
+            ad_storage: consentimentoGoogle,
+            analytics_storage: consentimentoGoogle,
+            ad_user_data: consentimentoGoogle,
+            ad_personalization: consentimentoGoogle
+        });
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MQ4B3G3R');</script>
+    <!-- End Google Tag Manager -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Política de Privacidade - Guairacá Ambiental</title>
@@ -8,6 +41,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+        <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQ4B3G3R"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
     <!-- Cabeçalho (Com links apontando de volta para a Home) -->
     <header id="header" class="header-fixo">
@@ -80,7 +118,8 @@
                 </ul>
 
                 <h2>5. Uso de Cookies</h2>
-                <p>O nosso site utiliza cookies apenas para melhorar a sua experiência de navegação e entender como os visitantes interagem com a página (através de métricas anônimas de acesso). Você pode desabilitar os cookies a qualquer momento ajustando as configurações do seu navegador, porém isso pode afetar o funcionamento de alguns recursos do site.</p>
+                <p>Este site utiliza o Google Tag Manager para administrar tags e pode utilizar o Google Analytics 4 para compreender como as páginas são acessadas. Cookies de análise e publicidade são ativados de acordo com a escolha feita no banner de consentimento. Quando recusados, esses tipos de armazenamento permanecem negados; as tags do Google ainda podem enviar sinais limitados sem cookies conforme o Modo de Consentimento.</p>
+                <p>Você pode alterar sua decisão a qualquer momento pelo botão “Preferências de cookies” disponível no rodapé.</p>
 
                 <h2>6. Armazenamento e Segurança</h2>
                 <p>Adotamos medidas de segurança técnicas e administrativas aptas a proteger os seus dados pessoais de acessos não autorizados e de situações acidentais de destruição, perda ou alteração. Seus dados são armazenados apenas pelo tempo necessário para a prestação do serviço ou cumprimento de exigências legais.</p>
@@ -155,7 +194,10 @@
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3.8l.2-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
                             </a>
                         </div>
-                        <a href="politica-de-privacidade.html" class="link-privacidade">Política de Privacidade</a>
+                        <div class="footer-politicas">
+                            <a href="politica-de-privacidade.html" class="link-privacidade">Política de Privacidade</a>
+                            <button id="preferencias-cookies" class="botao-preferencias-cookies" type="button">Preferências de cookies</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -168,6 +210,16 @@
             </div>
         </div>
     </footer>
+
+    <div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Preferências de cookies" aria-live="polite">
+        <div class="cookie-content">
+            <p>Utilizamos cookies opcionais para medir o uso do site e melhorar nossos serviços. Você pode aceitar ou recusar. Saiba mais nesta Política de Privacidade.</p>
+            <div class="cookie-acoes">
+                <button id="recusar-cookies" class="btn btn-cookie btn-cookie-recusar" type="button">Recusar</button>
+                <button id="aceitar-cookies" class="btn btn-principal btn-cookie" type="button">Aceitar</button>
+            </div>
+        </div>
+    </div>
 
     <script src="js/main.js"></script>
 </body>

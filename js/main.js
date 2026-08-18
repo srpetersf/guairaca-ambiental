@@ -111,18 +111,63 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const cookieBanner = document.getElementById('cookie-banner');
         const btnAceitarCookies = document.getElementById('aceitar-cookies');
+        const btnRecusarCookies = document.getElementById('recusar-cookies');
+        const btnPreferenciasCookies = document.getElementById('preferencias-cookies');
 
-        if (cookieBanner && btnAceitarCookies) {
-            const cookiesAceitos = localStorage.getItem('cookiesGuairaca');
+        if (cookieBanner && btnAceitarCookies && btnRecusarCookies) {
+            let escolhaCookies = null;
 
-            if (!cookiesAceitos) {
+            try {
+                escolhaCookies = localStorage.getItem('cookiesGuairaca');
+
+                // Mantém a escolha dos visitantes que aceitaram no banner antigo.
+                if (escolhaCookies === 'true') {
+                    escolhaCookies = 'granted';
+                    localStorage.setItem('cookiesGuairaca', escolhaCookies);
+                }
+            } catch (erro) {
+                escolhaCookies = null;
+            }
+
+            const atualizarConsentimentoGoogle = (status) => {
+                if (typeof gtag !== 'function') return;
+
+                gtag('consent', 'update', {
+                    ad_storage: status,
+                    analytics_storage: status,
+                    ad_user_data: status,
+                    ad_personalization: status
+                });
+            };
+
+            const salvarEscolhaCookies = (status) => {
+                try {
+                    localStorage.setItem('cookiesGuairaca', status);
+                } catch (erro) {
+                    // O consentimento continua válido durante a página atual.
+                }
+
+                atualizarConsentimentoGoogle(status);
+                cookieBanner.classList.remove('mostrar');
+            };
+
+            if (escolhaCookies !== 'granted' && escolhaCookies !== 'denied') {
                 setTimeout(() => {
                     cookieBanner.classList.add('mostrar');
                 }, 1000);
             }
 
             btnAceitarCookies.addEventListener('click', () => {
-                localStorage.setItem('cookiesGuairaca', 'true');
-                cookieBanner.classList.remove('mostrar');
+                salvarEscolhaCookies('granted');
             });
+
+            btnRecusarCookies.addEventListener('click', () => {
+                salvarEscolhaCookies('denied');
+            });
+
+            if (btnPreferenciasCookies) {
+                btnPreferenciasCookies.addEventListener('click', () => {
+                    cookieBanner.classList.add('mostrar');
+                });
+            }
         }
