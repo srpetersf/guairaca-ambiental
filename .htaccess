@@ -3,3 +3,4 @@ RewriteEngine On
 RewriteCond %{HTTPS} !=on [OR]
 RewriteCond %{HTTP_HOST} ^www\.guairacaambiental\.com\.br$ [NC]
 RewriteRule ^ https://guairacaambiental.com.br%{REQUEST_URI} [L,R=301]
+AddType application/xml .xml
